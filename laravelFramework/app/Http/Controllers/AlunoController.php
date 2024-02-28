@@ -10,13 +10,15 @@ class AlunoController extends Controller
     public function listar()
 {
     $alunos = Aluno::all();
-    return response()->json($alunos);
+    return view('listarAlunos')->with('alunos',$alunos);
+    //return response()->json($alunos);
 }
 
 public function listarID($id)
 {
     $aluno = Aluno::find($id);
-    return response()->json($aluno);
+    return view('listarAluno')->with('aluno',$aluno);
+    //return response()->json($aluno);
 }
 
 }
