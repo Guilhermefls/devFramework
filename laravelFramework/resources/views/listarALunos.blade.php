@@ -17,6 +17,9 @@
                     </tr>
                 @endforeach
             </tbody>
+            @error('erro')
+                <div>{{$message}}</div>
+            @enderror
         </table>
     </body>
 </html>

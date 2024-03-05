@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Aluno;
 use Illuminate\Http\Request;
 
+use function Laravel\Prompts\error;
+
 class AlunoController extends Controller
 {
     public function listar()
@@ -17,8 +19,27 @@ class AlunoController extends Controller
 public function listarID($id)
 {
     $aluno = Aluno::find($id);
-    return view('listarAluno')->with('aluno',$aluno);
+    if($aluno){
+        return view('visualizarAlunos')->with('aluno',$aluno);
+    }
+    else{
+        return redirect('/alunos')->withErrors(['erro'=>'Aluno não encontrado']);
+    }
     //return response()->json($aluno);
+
+
+}
+public function store(Request $request){
+    $aluno=new Aluno;
+    $aluno->nome=$request->nome;
+    $aluno->dataNascimento=$request->dataNascimento;
+    $aluno->email=$request->email;
+    $aluno->curso=$request->curso;
+    $aluno->save();
+
+    reutrn response()->json($aluno,201);
+
+
 }
 
 }
